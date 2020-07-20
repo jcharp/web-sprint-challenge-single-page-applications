@@ -6,14 +6,22 @@ import ReactDom from "react-dom";
 
 
 const Pizza = () => {
-    const [ name, setName] = useState('');
+    const [ name, setName ] = useState('');
+    const [ size, setSize ] = useState('');
+    const [ toppings, setToppings ] = useState('');
 
     return (
         <>
         <h2> choose your topings</h2>
-        <form>
+        <form onSubmit={event => {
+            event.preventDefault();
+        }}>
             <label htmlFor='fname'>Name</label>
-            <input 
+            <input onChange={event => {
+                setName(event.target.value);
+                console.log('this is the name', name);
+               
+            }}
             minLength="2"
             placeholder='Name'
             id="fname"
@@ -22,7 +30,10 @@ const Pizza = () => {
         /> <br/>
         
         <label htmlFor="pizzaSize">Choose Your pizzaSize</label>
-        <select>
+        <select onChange= {event => {
+            setSize(event.target.value);
+            console.log('this is the size', size);
+        }}>
             
             <option>Large Pie</option>
             <option>Medium Pie</option>
@@ -34,16 +45,28 @@ const Pizza = () => {
         <label htmlFor="chooseTopings">Choose Your Toppings</label><br/>
 
         <label htmlFor='Pepperoni'>Pepperoni</label>
-        <input type='checkbox' id='Pepperoni'/><br/>
+        <input onChange={event => {
+            if (event.target.checked) {setToppings(toppings +"Pepperoni ")}
+              console.log('toppings',toppings);
+        }} type='checkbox' id='Pepperoni'/><br/>
 
         <label htmlFor='Onions'>Onions</label>
-        <input type='checkbox' id='Onions'/><br/>
+        <input onChange={event => {
+            if (event.target.checked) {setToppings(toppings + "Onions ")}
+              console.log('toppings',toppings);
+         }} type='checkbox' id='Onions'/><br/>
 
         <label htmlFor='Mushroom'>Mushrooms</label>
-        <input type='checkbox' id='Mushroom'/><br/>
+        <input onChange={event => {
+            if (event.target.checked) {setToppings(toppings + "Mushrooms ")}
+              console.log('toppings',toppings);
+         }} type='checkbox' id='Mushroom'/><br/>
 
         <label htmlFor='Saussage'>Saussage</label>
-        <input type='checkbox' id='Saussage'/><br/>
+        <input  onChange={event => {
+            if (event.target.checked) {setToppings(toppings + "Saussage ")}
+              console.log('toppings',toppings);
+         }}type='checkbox' id='Saussage'/><br/>
 
         <label htmlFor='specialIns'>Special instructions</label>
         <input 
@@ -53,8 +76,7 @@ const Pizza = () => {
             placeholder='Special Instructions'
             />
             <br/>
-
-        <input type='submit'  />
+         <button>Add to Order</button>
 
 
         </form>

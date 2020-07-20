@@ -12,6 +12,7 @@ const App = () => {
     <>
       
       <Link to="/pizza"> Build Your Pizza </Link>
+      <br/>
       <Link to="/"> Home </Link>
 
 
