@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import App from "./App";
 import "./index.css";
 import ReactDom from "react-dom";
@@ -6,6 +6,8 @@ import ReactDom from "react-dom";
 
 
 const Pizza = () => {
+    const [ name, setName] = useState('');
+
     return (
         <>
         <h2> choose your topings</h2>
