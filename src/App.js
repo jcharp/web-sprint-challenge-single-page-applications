@@ -2,6 +2,9 @@ import React from "react";
 import { Route, Link } from "react-router-dom";
 import Pizza from "./Pizza";
 import "./index";
+import Home from "./Home";
+
+
 
 
 const App = () => {
@@ -12,9 +15,9 @@ const App = () => {
       <Link to="/"> Home </Link>
 
 
-       <Route exact path='/' />     
+       <Route exact path='/' component={Home}/>   
       <Route exact path="/pizza" component={Pizza}/>
-      <h1>Pizza While you Learn</h1>
+      
       
       
     </>
