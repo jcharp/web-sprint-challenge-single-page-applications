@@ -3,6 +3,7 @@ import App from "./App";
 import "./index.css";
 import ReactDom from "react-dom";
 import axios from 'axios';
+import * as yup from "yup";
 
 
 
@@ -11,6 +12,10 @@ const Pizza = () => {
     const [ size, setSize ] = useState('');
     const [ toppings, setToppings ] = useState('');
 
+
+    const formSchema = yup.object().shape({
+        name: yup.string().required("Name must be at least two characters")
+    })
     return (
         <>
         <h2> choose your topings</h2>
@@ -69,15 +74,14 @@ const Pizza = () => {
               console.log('toppings',toppings);
          }}type='checkbox' id='Saussage'/><br/>
 
-        <label htmlFor='specialIns'>Special instructions</label>
-        <input 
-            type="text"
-            maxLength='200'
-            id='specialins'
-            placeholder='Special Instructions'
-            />
+        <label htmlFor='specialIns'>
+            Special instructions <br/>
+            <textarea name="specialIns" />
+        </label>
+
+        
             <br/>
-         <button>Add to Order</button>
+         <button type="submit">Add to Order</button>
 
 
         </form>
