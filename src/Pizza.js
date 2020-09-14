@@ -10,7 +10,19 @@ const Pizza = () => {
 
 
     return(
-        <h1>place holder</h1>
+        <>
+            <h2>Create Your Personalized Pizza</h2>
+
+            <label htmlFor="name">Name</label>
+            <input 
+                type="text"
+                minLenght="2"
+                placeholder='Name'
+                id='name'
+                />
+
+
+        </>
 
     )
 
