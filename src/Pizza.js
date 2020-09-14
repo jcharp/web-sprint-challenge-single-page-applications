@@ -29,7 +29,7 @@ const Pizza = () => {
                 minLength="2"
                 placeholder='Name'
                 id='name'
-                value={name}
+                
                 />
             <br/>
 
