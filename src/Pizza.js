@@ -1,30 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './index.css';
 import * as yup from 'yup';
 import ReactDom from 'react-dom';
 
 
 const Pizza = () => {
-    const [name, setName]= useState('');
-    const [size, setSize]= useState('');
-    const [toppings, setToppings]= useState('');
+    const [pieType, setPieType] = useState({
+        name: "",
+        size: "",
+        toppings: "",
+        id:"",
+
+    });
+
+    const [errors, setErrors] = useState({
+        name: "",
+        size: "",
+        toppings: "",
+        id:"",
+
+    });
+
+
+    // const [name, setName]= useState('');
+    // const [size, setSize]= useState('');
+    // const [toppings, setToppings]= useState('');
 
     const formSchema = yup.object().shape({
         name: yup.string().required('Name must be at least two characters')
     })
 
+    useEffect(() => {
+        formSchema.isValid(pieType).then(valid => {
+
+        })
+
+    }, [pieType])
+
+
+
+    const pizzaSubmit = e =>{
+        e.preventDefault();
+
+    }
+
+    const inputChange = e => {
+
+        const newPieData = {
+            ...pieType,
+     [e.target.name]: e.target.type === "checkbox" ? e.target.checked: e.target.value       
+
+        }
+        setPieType(newPieData);
+    }
+
     return(
         <>
             <h2>Create Your Personalized Pizza</h2>
-        <form onSubmit={event =>{
-            event.preventDefault();
-        }}>
+        <form onSubmit={pizzaSubmit}>
                
             <label htmlFor="name">Name </label>
-            <input onChange={event => {
-                setName(event.target.value)
-                console.log('this is the name', name);
-            }}
+            <input onChange={inputChange}
                 type="text"
                 minLength="2"
                 placeholder='Name'
@@ -34,10 +70,7 @@ const Pizza = () => {
             <br/>
 
             <label htmlFor='size'>Coose your Pizza size </label>
-            <select onChange= {event => {
-                setSize(event.target.value);
-                console.log('this is the pizza size', size)
-            }}>
+            <select onChange= {inputChange}>
 
                 <option>Large Pie</option>
                 <option>Medium Pie</option>
@@ -54,9 +87,7 @@ const Pizza = () => {
             <label htmlFor='toppings'>Choose your Toppings </label><br/>
 
             <label htmlFor='pepperoni'>Pepperoni</label>
-            <input onChange={event => {
-                if(event.target.checked) {setToppings(toppings + "pepperoni")}
-            }}
+            <input onChange={inputChange}
                 type='checkbox'
                 id='pepperoni'/>
              <br/>
@@ -64,33 +95,27 @@ const Pizza = () => {
 
 
              <label htmlFor='onions'>Onions</label>
-            <input onChange={event => {
-                if(event.target.checked) {setToppings(toppings + "Onions")}
-            }}
+            <input onChange={inputChange}
                 type='checkbox'
                 id='onions'/>
              <br/>
 
 
              <label htmlFor='mushrooms'>Mushrooms</label>
-            <input onChange={event => {
-                if(event.target.checked) {setToppings(toppings + "Mushrooms")}
-            }}
+            <input onChange={inputChange}
                 type='checkbox'
                 id='mushrooms'/>
              <br/>
             
              <label htmlFor='saussage'>Saussage</label>
-            <input onChange={event => {
-                if(event.target.checked) {setToppings(toppings + "Saussage")}
-            }}
+            <input onChange={inputChange}
                 type='checkbox'
                 id='saussage'/>
              <br/>
              <br/>
 
             <label htmlFor='specialInstructions'>Special Instructions <br/>
-            <textarea name='specialInstructions'/>
+            <textarea name='specialInstructions' onChange={inputChange} />
             </label>
 
             <br/>
