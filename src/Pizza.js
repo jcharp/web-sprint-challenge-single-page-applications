@@ -8,13 +8,13 @@ import axios from 'axios';
 const Pizza = () => {
 
     const [post, setPost] = useState([])
-    
+
     const [pieType, setPieType] = useState({
         name: "",
         size: "",
         toppings: "",
         id:"",
-        specialInstructions: "",
+        specialInstructions: "", 
 
     });
 
@@ -47,6 +47,17 @@ const Pizza = () => {
 
     const pizzaSubmit = e =>{
         e.preventDefault();
+        axios.post("https://reqres.in/api/users", pieType )
+        .then(response => {
+            setPost(response.data);
+            setPieType({
+                name: "",
+                size: "",
+                toppings: "",
+                id:"",
+                specialInstructions: "", 
+            });
+        }).catch(err => console.log(err.response));
 
     }
 
@@ -58,6 +69,8 @@ const Pizza = () => {
 
         }
         setPieType(newPieData);
+
+        console.log("pie type", pieType);
     }
 
     return(
@@ -71,12 +84,13 @@ const Pizza = () => {
                 minLength="2"
                 placeholder='Name'
                 id='name'
+                name="name"
                 
                 />
             <br/>
 
             <label htmlFor='size'>Coose your Pizza size </label>
-            <select onChange= {inputChange} value={pieType.size} >
+            <select onChange= {inputChange}  >
 
                 <option>Large Pie</option>
                 <option>Medium Pie</option>
@@ -127,7 +141,7 @@ const Pizza = () => {
             <br/>
             <button type='submit'>Add to Order</button>
             
-
+            <pre>{JSON.stringify(post, null, 2)}</pre>
          
 
         </form>
