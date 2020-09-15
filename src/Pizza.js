@@ -2,14 +2,19 @@ import React, { useState, useEffect } from "react";
 import './index.css';
 import * as yup from 'yup';
 import ReactDom from 'react-dom';
+import axios from 'axios';
 
 
 const Pizza = () => {
+
+    const [post, setPost] = useState([])
+    
     const [pieType, setPieType] = useState({
         name: "",
         size: "",
         toppings: "",
         id:"",
+        specialInstructions: "",
 
     });
 
@@ -18,6 +23,7 @@ const Pizza = () => {
         size: "",
         toppings: "",
         id:"",
+        specialInstructions: "",
 
     });
 
@@ -60,7 +66,7 @@ const Pizza = () => {
         <form onSubmit={pizzaSubmit}>
                
             <label htmlFor="name">Name </label>
-            <input onChange={inputChange}
+            <input onChange={inputChange} value={pieType.name}
                 type="text"
                 minLength="2"
                 placeholder='Name'
@@ -70,7 +76,7 @@ const Pizza = () => {
             <br/>
 
             <label htmlFor='size'>Coose your Pizza size </label>
-            <select onChange= {inputChange}>
+            <select onChange= {inputChange} value={pieType.size} >
 
                 <option>Large Pie</option>
                 <option>Medium Pie</option>
@@ -87,7 +93,7 @@ const Pizza = () => {
             <label htmlFor='toppings'>Choose your Toppings </label><br/>
 
             <label htmlFor='pepperoni'>Pepperoni</label>
-            <input onChange={inputChange}
+            <input onChange={inputChange} value={pieType.toppings}
                 type='checkbox'
                 id='pepperoni'/>
              <br/>
@@ -95,27 +101,27 @@ const Pizza = () => {
 
 
              <label htmlFor='onions'>Onions</label>
-            <input onChange={inputChange}
+            <input onChange={inputChange} value={pieType.toppings}
                 type='checkbox'
                 id='onions'/>
              <br/>
 
 
              <label htmlFor='mushrooms'>Mushrooms</label>
-            <input onChange={inputChange}
+            <input onChange={inputChange} value={pieType.toppings}
                 type='checkbox'
                 id='mushrooms'/>
              <br/>
             
              <label htmlFor='saussage'>Saussage</label>
-            <input onChange={inputChange}
+            <input onChange={inputChange} value={pieType.toppings}
                 type='checkbox'
                 id='saussage'/>
              <br/>
              <br/>
 
             <label htmlFor='specialInstructions'>Special Instructions <br/>
-            <textarea name='specialInstructions' onChange={inputChange} />
+            <textarea name='specialInstructions' onChange={inputChange} value={pieType.specialInstructions}/>
             </label>
 
             <br/>
